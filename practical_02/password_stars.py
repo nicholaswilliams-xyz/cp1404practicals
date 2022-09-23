@@ -22,4 +22,3 @@ def print_asterisks(user_password):
 
 
 main()
-print()
