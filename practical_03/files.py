@@ -9,6 +9,7 @@ def main():
     read_and_add_two_numbers()
     read_and_add_all_numbers()
 
+
 def create_name_file():
     user_name = input("Enter name: ")
     out_file = open("name.txt", 'w')
