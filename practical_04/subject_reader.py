@@ -6,9 +6,11 @@ Data file -> lists program
 FILENAME = "subject_data.txt"
 list_of_lines = []
 
+
 def main():
     data = get_data()
-    print(data)
+    print(f"data")
+    print_formatted_list()
 
 
 def get_data():
@@ -24,10 +26,15 @@ def get_data():
         print(parts)  # See if that worked
         print("----------")
 
-        list_of_lines.append(parts)
+        list_of_lines.append(parts)  # Append each list to the list of lines
         print(list_of_lines)
-
     input_file.close()
+    return list_of_lines
+
+
+def print_formatted_list():
+    for data in list_of_lines:
+        print(f"{data[0]} is taught by {data[1]} and has {data[2]} students")
 
 
 main()
