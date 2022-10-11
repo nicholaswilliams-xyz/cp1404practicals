@@ -4,7 +4,7 @@ Data file -> lists program
 """
 
 FILENAME = "subject_data.txt"
-
+list_of_lines = []
 
 def main():
     data = get_data()
@@ -23,6 +23,10 @@ def get_data():
         parts[2] = int(parts[2])  # Make the number an integer (ignore PyCharm's warning)
         print(parts)  # See if that worked
         print("----------")
+
+        list_of_lines.append(parts)
+        print(list_of_lines)
+
     input_file.close()
 
 
