@@ -14,12 +14,14 @@ def main():
 
 
 def get_numbers():
+"""Get user numbers"""
     for i in range(5):
         user_number = int(input("Input any number: "))
         numbers.append(user_number)
 
 
 def print_interesting_things():
+"""Print information about inputted numbers"""
     print(f"The first number is {numbers[0]}")
     print(f"The last number is {numbers[-1]}")
     print(f"The smallest number is {min(numbers)}")
@@ -28,6 +30,7 @@ def print_interesting_things():
 
 
 def check_username():
+"""Check for exact match between inputted username and those in the usernames list"""
     user_name = input("Input username: ")
     if user_name in usernames:
         print("Access granted")
