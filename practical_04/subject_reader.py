@@ -34,7 +34,7 @@ def get_data():
 
 def print_formatted_list():
     for data in list_of_lines:
-        print(f"{data[0]} is taught by {data[1]} and has {data[2]} students")
+        print(f"{data[0]} is taught by {data[1]:<12} and has {data[2]:<3} students")
 
 
 main()
