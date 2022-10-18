@@ -4,7 +4,7 @@ Estimated completion time: 40m
 Actual completion time: 34m
 """
 
-NAME_TO_EMAIL = {}
+name_to_email = {}
 
 email = input("Email: ")
 while email != "":
@@ -12,15 +12,15 @@ while email != "":
 
     is_name_correct = input(f"Is your name {name_before_at}? (Y/N): ")
 
-    if is_name_correct.lower() == 'y' or is_name_correct.lower() == '':
-        NAME_TO_EMAIL[name_before_at] = email
+    if is_name_correct.lower() == 'y' or is_name_correct == '':
+        name_to_email[name_before_at] = email
     else:
         proper_name = input("Name: ")
-        NAME_TO_EMAIL[proper_name] = email
+        name_to_email[proper_name] = email
 
     email = input("Email: ")
 
-left_align = len(max(NAME_TO_EMAIL, key=len))
+left_align = len(max(name_to_email, key=len))
 
-for name, email in NAME_TO_EMAIL.items():
+for name, email in name_to_email.items():
     print(f"{name:<{left_align + 1}}: {email}")
