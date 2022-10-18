@@ -1,6 +1,6 @@
 """
 Print the number of occurrences of each word in a string.
-Estimated completion time: 30 minutes
+Estimated completion time: 30m
 Actual completion time: 37m 20s
 """
 
