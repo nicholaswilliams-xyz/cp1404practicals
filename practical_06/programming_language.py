@@ -1,6 +1,6 @@
 """
+Programming language Class
 
-Start date: 31.10.2022
 Start time: 18:25
 Estimated completion time: 30 minutes
 Actual completion time: 50 minutes
