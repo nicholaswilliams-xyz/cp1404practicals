@@ -1,9 +1,8 @@
 """
-
-Start date: 31.10.2022
+Print only languages that are dynamically typed using a self-made ProgrammingLanguages function
 Start time: 18:45
 Estimated completion time: 30 minutes
-Actual completion time:
+Actual completion time:30 minutes
 """
 
 from programming_language import ProgrammingLanguage
