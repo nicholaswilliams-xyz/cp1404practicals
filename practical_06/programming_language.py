@@ -3,7 +3,7 @@
 Start date: 31.10.2022
 Start time: 18:25
 Estimated completion time: 30 minutes
-Actual completion time: 18:44
+Actual completion time: 50 minutes
 """
 
 
@@ -18,10 +18,11 @@ class ProgrammingLanguage:
         self.year = year
 
     def __str__(self):
-        "Return"
+        """Return f string of the attributes of a programming language"""
         return f"{self.name}, {self.typing} Typing, Reflection={self.reflection}, First appeared in {self.year}"
 
     def is_dynamic(self):
+        """If the programming language is dynamically-typed, return 1. Otherwise, return 0."""
         if self.typing == "Dynamic":
             return 1
         else:
