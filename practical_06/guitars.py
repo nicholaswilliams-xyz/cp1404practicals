@@ -21,11 +21,13 @@ def main():
 
 
 def get_name():
+    """Get name of guitar"""
     name = input("Name: ")
     return name
 
 
 def get_year():
+    """Get year of guitar"""
     done = False
     while not done:
         try:
@@ -37,6 +39,7 @@ def get_year():
 
 
 def get_cost():
+    """Get cost of guitar"""
     done = False
     while not done:
         try:
