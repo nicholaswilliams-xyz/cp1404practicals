@@ -5,9 +5,8 @@ Actual completion time:
 """
 
 from project import Project
-import datetime
+from datetime import datetime
 
-# PROJECTS = "projects.txt"
 NAME_INDEX = 0
 START_DATE_INDEX = 1
 PRIORITY_INDEX = 2
@@ -32,9 +31,15 @@ def main():
         if menu_choice == "L":
             projects = load_projects()
         elif menu_choice == "S":
-            print("TODO")
+            try:
+                save_projects(projects)
+            except UnboundLocalError:
+                print("Projects must first be loaded")
         elif menu_choice == "D":
-            display_projects(projects)
+            try:
+                display_projects(projects)
+            except UnboundLocalError:
+                print("Projects must first be loaded")
         elif menu_choice == "F":
             print("TODO")
         elif menu_choice == "A":
@@ -60,7 +65,7 @@ def load_projects():
                                   float(parts[COST_ESTIMATE_INDEX]), int(parts[COMPLETION_PERCENTAGE_INDEX]))
                 projects.append(project)
             in_file.close()
-            print(f"{filename} loaded")
+            print(f"Projects loaded")
             done = True
         except FileNotFoundError:
             print("File not found")
@@ -70,7 +75,7 @@ def load_projects():
 
 def display_projects(projects):
     print("Completed projects:")
-    projects.sort()  # Sort project by priority
+    projects.sort()  # Sort projects by priority
     for project in projects:
         if project.is_complete():
             print(f"    {project}")
@@ -78,6 +83,25 @@ def display_projects(projects):
     for project in projects:
         if not project.is_complete():
             print(f"    {project}")
+
+
+def save_projects(projects):
+    filename = get_valid_string("Filename: ")
+    done = False
+    while not done:
+        try:
+            out_file = open(filename, 'w')
+            print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=out_file)
+            for project in projects:
+                print(
+                    f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t{project.completion_percentage}",
+                    file=out_file)
+            out_file.close()
+            print(f"Projects saved in {filename}")
+            done = True
+        except FileExistsError:
+            print(f"File {filename} already exists")
+            filename = get_valid_string("Filename: ")
 
 
 def get_valid_string(prompt):
