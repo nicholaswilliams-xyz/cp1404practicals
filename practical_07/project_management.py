@@ -7,7 +7,7 @@ Actual completion time:
 from project import Project
 import datetime
 
-PROJECTS = "projects.txt"
+# PROJECTS = "projects.txt"
 NAME_INDEX = 0
 START_DATE_INDEX = 1
 PRIORITY_INDEX = 2
@@ -31,7 +31,6 @@ def main():
     while menu_choice != "Q":
         if menu_choice == "L":
             projects = load_projects()
-            print("TODO")
         elif menu_choice == "S":
             print("TODO")
         elif menu_choice == "D":
@@ -49,14 +48,23 @@ def main():
 
 def load_projects():
     projects = []
-    in_file = open(PROJECTS, 'r')
-    in_file.readline()  # Skip header
-    for line in in_file:
-        parts = line.strip().split('\t')
-        project = Project(str(parts[NAME_INDEX]), parts[START_DATE_INDEX], int(parts[PRIORITY_INDEX]),
-                          float(parts[COST_ESTIMATE_INDEX]), int(parts[COMPLETION_PERCENTAGE_INDEX]))
-        projects.append(project)
-    in_file.close()
+    filename = get_valid_string("Filename: ")
+    done = False
+    while not done:
+        try:
+            in_file = open(filename, 'r')
+            in_file.readline()  # Skip header
+            for line in in_file:
+                parts = line.strip().split('\t')
+                project = Project(str(parts[NAME_INDEX]), parts[START_DATE_INDEX], int(parts[PRIORITY_INDEX]),
+                                  float(parts[COST_ESTIMATE_INDEX]), int(parts[COMPLETION_PERCENTAGE_INDEX]))
+                projects.append(project)
+            in_file.close()
+            print(f"{filename} loaded")
+            done = True
+        except FileNotFoundError:
+            print("File not found")
+            filename = get_valid_string("Filename: ")
     return projects
 
 
@@ -70,6 +78,14 @@ def display_projects(projects):
     for project in projects:
         if not project.is_complete():
             print(f"    {project}")
+
+
+def get_valid_string(prompt):
+    item = input(prompt)
+    while item == "":
+        print("Invalid")
+        item = input(prompt)
+    return item
 
 
 if __name__ == "__main__":
