@@ -21,7 +21,8 @@ def main():
         guitar = Guitar(parts[NAME_INDEX], int(parts[YEAR_INDEX]), float(parts[COST_INDEX]))
         guitars.append(guitar)
     in_file.close()
-
+    
+    guitars.sort()
     for guitar in guitars:
         print(guitar)
 
