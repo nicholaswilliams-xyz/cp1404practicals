@@ -23,23 +23,19 @@ MENU = """
 - (U)pdate project
 - (Q)uit
 
->>> 
-"""
+>>> """
 
 
 def main():
-    projects = read_projects()
-    for project in projects:
-        print(project)
-
     menu_choice = input(MENU).upper()
     while menu_choice != "Q":
         if menu_choice == "L":
+            projects = load_projects()
             print("TODO")
         elif menu_choice == "S":
             print("TODO")
         elif menu_choice == "D":
-            print("TODO")
+            display_projects(projects)
         elif menu_choice == "F":
             print("TODO")
         elif menu_choice == "A":
@@ -51,17 +47,29 @@ def main():
         menu_choice = input(MENU).upper()
 
 
-def read_projects():
+def load_projects():
     projects = []
     in_file = open(PROJECTS, 'r')
     in_file.readline()  # Skip header
     for line in in_file:
         parts = line.strip().split('\t')
-        project = Project(parts[NAME_INDEX], parts[START_DATE_INDEX], parts[PRIORITY_INDEX],
-                          parts[COST_ESTIMATE_INDEX], parts[COMPLETION_PERCENTAGE_INDEX])
+        project = Project(str(parts[NAME_INDEX]), parts[START_DATE_INDEX], int(parts[PRIORITY_INDEX]),
+                          float(parts[COST_ESTIMATE_INDEX]), int(parts[COMPLETION_PERCENTAGE_INDEX]))
         projects.append(project)
     in_file.close()
     return projects
+
+
+def display_projects(projects):
+    print("Completed projects:")
+    projects.sort()  # Sort project by priority
+    for project in projects:
+        if project.is_complete():
+            print(f"    {project}")
+    print("Uncompleted projects:")
+    for project in projects:
+        if not project.is_complete():
+            print(f"    {project}")
 
 
 if __name__ == "__main__":
