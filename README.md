@@ -15,5 +15,5 @@ Visit my anachronistic website: <a href="https://www.nicholaswilliams.xyz">nicho
 
 - Proper naming  (variable_names, function_names, ClassNames)
 - Use of functions 
-- Concise comments
+- Concise comments and docstrings
 
