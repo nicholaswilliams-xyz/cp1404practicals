@@ -47,7 +47,10 @@ def main():
             except UnboundLocalError:
                 print("Projects must first be loaded")
         elif menu_choice == "A":
-            print("TODO")
+            try:
+                add_new_project(projects)
+            except UnboundLocalError:
+                print("Projects must first be loaded")
         elif menu_choice == "U":
             print("TODO")
         else:
@@ -118,6 +121,16 @@ def show_projects_after_date(projects):
             print(project)
 
 
+def add_new_project(projects):
+    name = get_valid_string("Name: ")
+    start_date = get_valid_date("Start date (dd/mm/yyyy): ")
+    priority = get_valid_positive_int("Priority: ")
+    cost_estimate = float(input("Cost estimate: $"))
+    completion_percentage = get_valid_positive_int("Percent complete: ")
+    new_project = Project(str(name), start_date, int(priority), float(cost_estimate), int(completion_percentage))
+    projects.append(new_project)
+
+
 def get_valid_string(prompt):
     item = input(prompt)
     while item == "":
@@ -133,7 +146,23 @@ def get_valid_date(prompt):
     except ValueError:
         print("Invalid date format. Use dd/mm/yyyy format")
         input_date = input(prompt)
+        input_date = datetime.strptime(input_date, '%d/%m/%Y').date()
     return input_date
+
+
+def get_valid_positive_int(prompt):
+    done = False
+    while not done:
+        try:
+            positive_int = int(input(prompt))
+            if positive_int < 0:
+                done = False
+                print("Input whole positive integers only")
+            else:
+                done = True
+        except ValueError:
+            print("Input whole positive integers only")
+    return positive_int  # Ignore error
 
 
 if __name__ == "__main__":
