@@ -52,7 +52,10 @@ def main():
             except UnboundLocalError:
                 print("Projects must first be loaded")
         elif menu_choice == "U":
-            print("TODO")
+            try:
+                update_project(projects)
+            except UnboundLocalError:
+                print("Projects must first be loaded")
         else:
             print("Invalid menu choice")
         menu_choice = input(MENU).upper()
@@ -131,6 +134,22 @@ def add_new_project(projects):
     projects.append(new_project)
 
 
+def update_project(projects):
+    for i, project in enumerate(projects):
+        print(f"{i} {project}")
+    project_number = get_valid_positive_int("Project choice: ")
+    while project_number > (len(projects) - 1):
+        print(f"Max project number = {len(projects) - 1}")
+        project_number = get_valid_positive_int("Project choice: ")
+    print(projects[project_number])
+    new_percentage = get_valid_positive_int_or_enter_skips("New percentage: ")
+    if new_percentage != "":
+        projects[project_number].completion_percentage = new_percentage
+    new_priority = get_valid_positive_int_or_enter_skips("New Priority: ")
+    if new_priority != "":
+        projects[project_number].priority = new_priority
+
+
 def get_valid_string(prompt):
     item = input(prompt)
     while item == "":
@@ -162,6 +181,24 @@ def get_valid_positive_int(prompt):
                 done = True
         except ValueError:
             print("Input whole positive integers only")
+    return positive_int  # Ignore error
+
+
+def get_valid_positive_int_or_enter_skips(prompt):
+    done = False
+    while not done:
+        positive_int = input(prompt)
+        if positive_int == "":
+            done = True
+        else:
+            try:
+                positive_int = int(positive_int)
+                if positive_int < 0:
+                    print("Input whole positive integers only")
+                else:
+                    done = True
+            except ValueError:
+                print("Input whole positive integers only")
     return positive_int  # Ignore error
 
 
