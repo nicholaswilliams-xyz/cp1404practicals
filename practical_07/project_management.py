@@ -159,13 +159,14 @@ def get_valid_string(prompt):
 
 
 def get_valid_date(prompt):
-    input_date = input(prompt)
-    try:
-        input_date = datetime.strptime(input_date, '%d/%m/%Y').date()
-    except ValueError:
-        print("Invalid date format. Use dd/mm/yyyy format")
+    done = False
+    while not done:
         input_date = input(prompt)
-        input_date = datetime.strptime(input_date, '%d/%m/%Y').date()
+        try:
+            input_date = datetime.strptime(input_date, '%d/%m/%Y').date()
+            done = True
+        except ValueError:
+            print("Invalid date format. Use dd/mm/yyyy format")
     return input_date
 
 
