@@ -6,6 +6,7 @@ Actual completion time:
 
 from project import Project
 from datetime import datetime
+from operator import attrgetter
 
 NAME_INDEX = 0
 START_DATE_INDEX = 1
@@ -41,7 +42,10 @@ def main():
             except UnboundLocalError:
                 print("Projects must first be loaded")
         elif menu_choice == "F":
-            print("TODO")
+            try:
+                show_projects_after_date(projects)
+            except UnboundLocalError:
+                print("Projects must first be loaded")
         elif menu_choice == "A":
             print("TODO")
         elif menu_choice == "U":
@@ -61,7 +65,9 @@ def load_projects():
             in_file.readline()  # Skip header
             for line in in_file:
                 parts = line.strip().split('\t')
-                project = Project(str(parts[NAME_INDEX]), parts[START_DATE_INDEX], int(parts[PRIORITY_INDEX]),
+                project = Project(str(parts[NAME_INDEX]),
+                                  (datetime.strptime(parts[START_DATE_INDEX], '%d/%m/%Y').date()),
+                                  int(parts[PRIORITY_INDEX]),
                                   float(parts[COST_ESTIMATE_INDEX]), int(parts[COMPLETION_PERCENTAGE_INDEX]))
                 projects.append(project)
             in_file.close()
@@ -91,10 +97,10 @@ def save_projects(projects):
     while not done:
         try:
             out_file = open(filename, 'w')
-            print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=out_file)
+            print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=out_file)  # Print headers
             for project in projects:
                 print(
-                    f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t{project.completion_percentage}",
+                    f"{project.name}\t{project.start_date.strftime('%d/%m/%Y')}\t{project.priority}\t{project.cost_estimate}\t{project.completion_percentage}",
                     file=out_file)
             out_file.close()
             print(f"Projects saved in {filename}")
@@ -104,12 +110,30 @@ def save_projects(projects):
             filename = get_valid_string("Filename: ")
 
 
+def show_projects_after_date(projects):
+    input_date = get_valid_date("Show projects that begin after date (dd/mm/yyyy): ")
+    projects.sort(key=attrgetter('start_date'))
+    for project in projects:
+        if input_date <= project.start_date:
+            print(project)
+
+
 def get_valid_string(prompt):
     item = input(prompt)
     while item == "":
         print("Invalid")
         item = input(prompt)
     return item
+
+
+def get_valid_date(prompt):
+    input_date = input(prompt)
+    try:
+        input_date = datetime.strptime(input_date, '%d/%m/%Y').date()
+    except ValueError:
+        print("Invalid date format. Use dd/mm/yyyy format")
+        input_date = input(prompt)
+    return input_date
 
 
 if __name__ == "__main__":
