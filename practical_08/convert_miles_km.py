@@ -46,6 +46,8 @@ class MilesKilometreApp(App):
             kilometres = float(miles) * 1.609
             self.root.ids.kilometres_value.text = str(round(kilometres, 3))
         except ValueError:
+            self.root.ids.input_number.text = str(0.0)
+            self.root.ids.kilometres_value.text = str(0.0)
             pass
 
 
