@@ -1,0 +1,30 @@
+BoxLayout:
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: 'horizontal'
+        TextInput:
+            id: input_number
+            text: '62'
+            font_size: 48
+            multiline: False
+            on_text: app.convert()
+        BoxLayout:
+            orientation: 'vertical'
+            Button:
+                text: 'Up'
+                # the following line specifies the function in the app class to call when the button is pressed
+                on_press: app.increment(1)
+            Button:
+                text: 'Down'
+                on_press: app.increment(-1)
+    BoxLayout:
+#        orientation: 'horizontal'
+#        Button:
+#            text: 'Convert mi to km'
+#            on_press: app.convert()
+    BoxLayout:
+        orientation: 'horizontal'
+        Label:
+            id: kilometres_value
+            color: 'yellow'
+            text: ''
