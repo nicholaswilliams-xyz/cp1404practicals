@@ -69,7 +69,7 @@ def get_valid_distance(prompt):
                 print("Invalid distance")
         except ValueError:
             done = False
-        print("Invalid distance")
+            print("Invalid distance")
     return distance
 
 
