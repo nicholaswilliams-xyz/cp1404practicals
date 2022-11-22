@@ -19,7 +19,7 @@ def main():
             taxi_choice = choose_taxi()
         elif user_choice.lower() == "d":
             try:
-                print("Function to be added")
+                drive_taxi(taxi_choice)
             except UnboundLocalError:
                 print("Choose a taxi before driving")
         else:
@@ -36,6 +36,12 @@ def choose_taxi():
     return taxi_choice
 
 
+def drive_taxi(taxi_choice):
+    driving_distance = get_valid_distance("Drive how far?: ")
+    taxis[taxi_choice].drive(driving_distance)
+    print(f"Your {taxis[taxi_choice]} trip will cost you ${taxis[taxi_choice].get_fare()}")
+
+
 def get_valid_index(prompt, array_length):
     done = False
     while not done:
@@ -47,6 +53,19 @@ def get_valid_index(prompt, array_length):
             done = False
         print("Invalid choice")
     return index
+
+
+def get_valid_distance(prompt):
+    done = False
+    while not done:
+        try:
+            distance = int(input(prompt))
+            if distance > 0:
+                done = True
+        except ValueError:
+            done = False
+        print("Invalid distance")
+    return distance
 
 
 if __name__ == "__main__":
