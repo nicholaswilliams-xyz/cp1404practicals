@@ -38,9 +38,7 @@ def main():
 
 def choose_taxi():
     """Display available taxis and obtain taxi choice from user"""
-    print("Taxis available:")
-    for i, taxi in enumerate(taxis):
-        print(f"{i} - {taxi}")
+    display_taxis()
     taxi_choice = get_valid_index("Choose taxi: ", len(taxis))
     return taxi_choice
 
@@ -48,10 +46,17 @@ def choose_taxi():
 def drive_taxi(taxi_choice, cumulative_bill):
     """Obtain distance from user to be driven in chosen taxi. Calculate and return cumulative bill"""
     driving_distance = get_valid_distance("Drive how far?: ")
+    taxis[taxi_choice].start_fare()
     taxis[taxi_choice].drive(driving_distance)
     print(f"Your {taxis[taxi_choice].name} trip will cost you ${taxis[taxi_choice].get_fare():0.2f}")
     cumulative_bill += taxis[taxi_choice].get_fare()
     return cumulative_bill
+
+
+def display_taxis():
+    print("Taxis available:")
+    for i, taxi in enumerate(taxis):
+        print(f"{i} - {taxi}")
 
 
 def get_valid_index(prompt, array_length):
