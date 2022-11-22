@@ -54,6 +54,7 @@ def drive_taxi(taxi_choice, cumulative_bill):
 
 
 def display_taxis():
+    """Display all the taxis available"""
     print("Taxis available:")
     for i, taxi in enumerate(taxis):
         print(f"{i} - {taxi}")
