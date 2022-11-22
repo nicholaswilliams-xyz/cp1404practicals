@@ -5,7 +5,8 @@ Taxi simulator to allow customer to drive a taxi of their choosing
 from practical_09.silver_service_taxi import SilverServiceTaxi
 from practical_09.taxi import Taxi
 
-MENU = """q)uit, c)hoose, d)rive
+MENU = """
+q)uit, c)hoose, d)rive
 >>> """
 
 total_bill = 0
@@ -39,7 +40,7 @@ def choose_taxi():
 def drive_taxi(taxi_choice):
     driving_distance = get_valid_distance("Drive how far?: ")
     taxis[taxi_choice].drive(driving_distance)
-    print(f"Your {taxis[taxi_choice]} trip will cost you ${taxis[taxi_choice].get_fare()}")
+    print(f"Your {taxis[taxi_choice].name} trip will cost you ${taxis[taxi_choice].get_fare():0.2f}")
 
 
 def get_valid_index(prompt, array_length):
@@ -49,9 +50,11 @@ def get_valid_index(prompt, array_length):
             index = int(input(prompt))
             if 0 <= index <= (array_length - 1):
                 done = True
+            else:
+                print("Invalid choice")
         except ValueError:
             done = False
-        print("Invalid choice")
+            print("Invalid choice")
     return index
 
 
@@ -62,6 +65,8 @@ def get_valid_distance(prompt):
             distance = int(input(prompt))
             if distance > 0:
                 done = True
+            else:
+                print("Invalid distance")
         except ValueError:
             done = False
         print("Invalid distance")
