@@ -11,7 +11,7 @@ def main():
 
 def test_taxi_class():
     """Demo test code to show how to use Taxi class."""
-    my_taxi = Taxi(name="Prius 1", fuel=100, price_per_km=1.23)
+    my_taxi = Taxi(name="Prius 1", fuel=100)
     my_taxi.start_fare()
     my_taxi.drive(40)
     print(
