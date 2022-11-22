@@ -28,8 +28,12 @@ def main():
                 print("Choose a taxi before driving")
         else:
             print("Invalid choice")
-        print(f"Bill to date: {total_bill:0.2f}")
+        print(f"Bill to date: ${total_bill:0.2f}")
         user_choice = input(MENU)
+    print(f"Total trip cost: ${total_bill:0.2f}")
+    print("Taxis are now:")
+    for taxi in taxis:
+        print(taxi)
 
 
 def choose_taxi():
@@ -41,13 +45,13 @@ def choose_taxi():
     return taxi_choice
 
 
-def drive_taxi(taxi_choice, total_bill):
+def drive_taxi(taxi_choice, cumulative_bill):
     """Obtain distance from user to be driven in chosen taxi. Calculate and return cumulative bill"""
     driving_distance = get_valid_distance("Drive how far?: ")
     taxis[taxi_choice].drive(driving_distance)
-    print(f"Your {taxis[taxi_choice].name} trip will cost you ${taxis[taxi_choice].get_fare() - total_bill:0.2f}")
-    total_bill += taxis[taxi_choice].get_fare()
-    return total_bill
+    print(f"Your {taxis[taxi_choice].name} trip will cost you ${taxis[taxi_choice].get_fare():0.2f}")
+    cumulative_bill += taxis[taxi_choice].get_fare()
+    return cumulative_bill
 
 
 def get_valid_index(prompt, array_length):
