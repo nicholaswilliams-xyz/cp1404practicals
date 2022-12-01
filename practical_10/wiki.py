@@ -11,7 +11,7 @@ def main():
             search_phrase_page = wikipedia.page(search_phrase, auto_suggest=False)
             print(f"  Title: {search_phrase_page.title}")
             print(f"    URL: {search_phrase_page.url}")
-            print(f"Summary: {wikipedia.summary(search_phrase)}")
+            print(f"Summary: {wikipedia.summary(search_phrase_page)}")
         except wikipedia.exceptions.PageError:
             print(f"Page id {search_phrase} does not match any pages. Try another id!")
         except wikipedia.exceptions.DisambiguationError as e:
